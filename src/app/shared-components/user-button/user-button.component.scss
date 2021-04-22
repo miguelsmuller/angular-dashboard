@@ -1,0 +1,74 @@
+@import "~src/assets/styles/variables";
+@import "~src/assets/styles/mixins";
+
+:host {
+  button {
+    padding: 8px 6px;
+    img {
+      @include border-radius();
+      width: 32px;
+      height: 32px;
+      margin-left: 2px;
+    }
+  }
+}
+
+.user-button-container {
+  @include with-prefix("border-radius", 4px);
+  width: 330px;
+  background-color: map-get($colors, "white-light");
+  border: 4px solid rgba(map-get($colors, "gray-dark"), 0.25);
+  display: block;
+
+  .user-button-header {
+    @include flex-row();
+    justify-content: flex-start;
+    align-content: stretch;
+    padding: 18px 24px;
+
+    .user-button-photo {
+      flex-shrink: 0; // LESS THAN BROTHER - CAN'T SHRINK
+      flex-grow: 0; // LESS THAN BROTHER - CAN'T GROW
+
+      img {
+        @include with-prefix("border-radius", 4px);
+        display: block;
+        width: 65px;
+        height: 65px;
+      }
+    }
+
+    .user-button-info {
+      flex-shrink: 1; // MORE THAN BROTHER - CAN SHRINK
+      flex-grow: 1; // MORE THAN BROTHER - CAN GROW
+
+      @include flex-column();
+      padding: 0px 15px;
+    }
+  }
+
+  .user-button-options {
+    li {
+      a {
+        @include text-weight("semibold");
+        border-top: 1px solid map-get($colors, "gray-light");
+        display: flex;
+        align-items: center;
+        padding: 17px;
+        transition: all 0.1s ease-in-out;
+        cursor: pointer;
+
+        mat-icon {
+          margin-right: 15px;
+        }
+
+        &:hover,
+        &:active,
+        &.active {
+          background: rgba(map_get($colors, "gray-light"), 0.25);
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

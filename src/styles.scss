@@ -1,0 +1,12 @@
+@import "~normalize.css/normalize.css";
+
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+@import "~@angular/cdk/overlay";
+@include cdk-overlay();
+
+@import "./assets/styles/variables";
+@import "./assets/styles/mixins";
+@import "./assets/styles/form";
+@import "./assets/styles/panel";
+@import "./assets/styles/base";

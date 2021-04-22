@@ -1,0 +1,379 @@
+/* # FORM
+================================================== */
+form {
+  width: 100%;
+
+  & > .form-group {
+    padding: 12px 0px;
+
+    &:last-child{
+      padding-bottom: 0px;
+    }
+  }
+}
+
+/* # INPUTS
+================================================== */
+input[type="text"],
+input[type="url"],
+input[type="tel"],
+input[type="number"],
+input[type="color"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+  width: 100%;
+  padding: 9px 10px;
+  display: block;
+  outline: none;
+  color: map-get($colors, 'gray-dark' );
+  border: 1px solid map-get($colors, 'gray' );
+  @include with-prefix(transition, "border-color 0.6, background-color 0.6s");
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: map-get($colors, 'white' );
+    border: 1px solid map-get($colors, 'blue' );
+  }
+
+  &:disabled,
+  &[readonly] {
+    background-color: map-get($colors, 'white-dark' );
+    border: 1px solid map-get($colors, 'gray' );
+  }
+
+  &.is-invalid {
+    border: 1px solid map-get($colors, 'danger' );
+  }
+
+  @include placeholder {
+    color: rgba(map_get($colors, "gray-dark"), 50%);
+  }
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* # INPUT TEXT
+================================================== */
+.floating-label {
+  position: relative;
+  width: 100%;
+
+  input {
+    padding: 15px 10px 14px 10px;
+  }
+
+  label {
+    color: map-get($colors, 'gray-dark' );
+    opacity: 0;
+    font-size: 10px;
+    position: absolute;
+    top: calc(50% - 7px);
+    left: 10px;
+    transition: all 0.3s ease;
+    cursor: text;
+  }
+
+  input:not(:placeholder-shown) {
+    padding: 21px 10px 8px 10px;
+  }
+
+  input:not(:placeholder-shown) + label {
+    transform: translateY(-15px);
+    opacity: 1;
+  }
+}
+
+/* # BUTTON
+================================================== */
+button {
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  outline: none;
+  padding: 12px 22px;
+}
+
+.btn {
+  border: none;
+  padding: 20px 45px;
+  background-color: transparent;
+  @include border-radius();
+  @include text-weight("semibold");
+  @include with-prefix("transition", "all 0.2s ease");
+  color: map-get($colors, 'gray-dark' );
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  /* BUTTONS COLORS */
+  @each $color in $colors {
+    &.btn-#{nth($color,1)} {
+      background: nth($color, 2);
+      color: map_get($colors, "white-dark");
+
+      &:hover,
+      &:active,
+      &:focus-within {
+        background: darken(nth($color, 2), 15%);
+      }
+
+      &:disabled {
+        background: lighten(nth($color, 2), 5%);
+      }
+    }
+  }
+
+  /* BUTTONS SIZES */
+  &.btn-small {
+    padding: 10px 25px;
+  }
+
+  &.btn-large {
+    padding: 30px 65px;
+  }
+
+  /* BUTTONS WITH ICON */
+  &.btn-icon {
+    mat-icon {
+      font-size: 24px;
+      position: relative;
+      left: -6px;
+    }
+  }
+
+  /* BUTTON COMPONENT */
+  &.btn-component {
+    background-color: transparent;
+    color: map-get($colors, 'gray-dark' );
+    @include text-weight("normal");
+    @include with-prefix("border-radius", 0px);
+    padding: 8px 14px;
+    height: 100%;
+
+    display: flex;
+    flex-flow: row nowrap;
+
+    justify-content: flex-start; //alignment along the x axis
+    align-items: center; //alignment along the y axis
+    align-content: center; //only applies if there is more than one row of items
+
+    &:hover {
+      background: rgba(map_get($colors, "gray"), 0.2);
+    }
+
+    &.btn-component-contrast {
+      color: map-get($colors, "white-light");
+
+      &:hover {
+        background: rgba(map_get($colors, "gray-dark"), 0.25);
+      }
+    }
+  }
+}
+
+.btn-group,
+.dt-buttons {
+  display: flex;
+  flex-flow: row nowrap;
+  padding: 0px 10px;
+
+  .btn {
+    &:first-child {
+      border-radius: $border-radius 0px 0px $border-radius;
+    }
+    &:not(:first-child):not(:last-child) {
+      border-radius: 0px;
+    }
+    &:last-child {
+      border-radius: 0px $border-radius $border-radius 0px;
+    }
+  }
+}
+
+/* # CHECKBOX, RADIOBUTTON AND SWITCH
+================================================== */
+.label-check {
+  display: block;
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+  text-align: left;
+  height: 20px;
+  margin: 10px 0px;
+
+  /* Hide the browser's default checkbox */
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+
+    /* When the checkbox is checked, add a blue background */
+    &:checked ~ .checkmark,
+    &:checked ~ .radiomark {
+      background-color: map_get($colors, "blue") !important;
+      border: 1px solid map_get($colors, "blue") !important;
+
+      /* Show the checkmark when checked */
+      &:after {
+        display: block;
+      }
+    }
+
+    &:checked + .switche {
+      background-color: map_get($colors, "secondary") !important;
+      border-color: map_get($colors, "secondary") !important;
+
+      &:before {
+        background-color: map_get($colors, "white-light");
+        -webkit-transform: translateX(16px);
+        -ms-transform: translateX(16px);
+        transform: translateX(16px);
+      }
+    }
+  }
+
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: map_get($colors, "white-light");
+    border: 1px solid map_get($colors, "gray");
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    &:after {
+      content: "";
+      position: absolute;
+      display: none;
+
+      left: 5px;
+      top: 1px;
+      width: 6px;
+      height: 10px;
+      border: solid map_get($colors, "white");
+      border-width: 0 2px 2px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+  }
+
+  /* Create a custom radiomark */
+  .radiomark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: map_get($colors, "white-light");
+    border: 1px solid map_get($colors, "gray-light");
+    border-radius: 50%;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+
+    &:after {
+      content: "";
+      position: absolute;
+      display: none;
+
+      top: 5px;
+      left: 5px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: map_get($colors, "white");
+    }
+  }
+
+  /* Create a custom radiomark */
+  .switche {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0px;
+    right: 0;
+    bottom: 0;
+    height: 21px;
+    width: 36px;
+    border-radius: 15px;
+    background-color: map_get($colors, "white-light");
+    border: 1px solid map_get($colors, "gray-light");
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+
+    &:before {
+      position: absolute;
+      content: "";
+      height: 13px;
+      width: 13px;
+      border-radius: 50%;
+      left: 2px;
+      bottom: 3px;
+      background-color: map_get($colors, "white-dark");
+      -webkit-transition: 0.4s;
+      transition: 0.4s;
+    }
+  }
+
+  /* On mouse-over, add a background color */
+  &:hover {
+    input ~ .checkmark {
+      background-color: map_get($colors, "white-dark");
+    }
+
+    input ~ .radiomark {
+      background-color: map_get($colors, "white-dark");
+    }
+  }
+}
+
+/* # BUTTONS
+================================================== */
+/* button,
+.button {
+  display: flex;
+  flex-flow: row nowrap;
+
+  justify-content: flex-start; //alignment along the x axis
+  align-items: center; //alignment along the y axis
+  align-content: center; //only applies if there is more than one row of items
+
+  border: none;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+
+  mat-icon {
+    font-size: 24px;
+  }
+
+  &.button-component {
+    padding: 8px 12px;
+    height: 100%;
+    background: transparent;
+
+    &:hover {
+      background: rgba(map_get($colors-primary, 'blue'), 0.25);
+    }
+
+    &.button-component-contrast {
+      color: map-get($colors-primary, 'white-light');
+
+      &:hover {
+        background: rgba(map_get($colors-primary, 'gray-dark'), 0.25);
+      }
+    }
+  }
+} */

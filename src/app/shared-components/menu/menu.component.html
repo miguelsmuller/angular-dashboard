@@ -1,0 +1,16 @@
+<ul>
+  <li *ngFor="let item of itens" [class.menu-item]="item.link" [class.menu-header]="!item.link">
+    <ng-template *ngIf="item.link; then itemLink; else itemHeader"></ng-template>
+
+    <ng-template #itemLink>
+      <a *ngIf="item.hidden!==true" href="{{item.link}}">
+        <mat-icon *ngIf="item.icon">{{item.icon}}</mat-icon>
+        {{item.label}}
+      </a>
+    </ng-template>
+
+    <ng-template #itemHeader>
+      {{item.label}}
+    </ng-template>
+  </li>
+</ul>

@@ -1,0 +1,29 @@
+<div class="user-button-wrapper" (click)="showDropdown()" #userButtonReference>
+  <button class="btn btn-component btn-component-contrast">
+    <mat-icon>arrow_drop_down</mat-icon>
+    <img src="assets/images/300.jpg">
+  </button>
+
+  <app-user-button-dropdown [reference]="userButtonReference">
+    <div class="user-button-container">
+      <div class="user-button-header">
+        <div class="user-button-photo">
+          <img src="assets/images/300.jpg">
+        </div>
+        <div class="user-button-info">
+          <h3 class="text-semibold">Isabela Luciana Sales</h3>
+          <span>iisabela@icotur.com.br</span>
+          <small class="text-color-gray">Administrador</small>
+        </div>
+      </div>
+      <div class="user-button-options">
+        <ul>
+          <li class="menu-item"><a routerLink="/"><mat-icon>credit_card</mat-icon> Lorem Ipsum</a></li>
+          <li class="menu-item"><a routerLink="/"><mat-icon>contact_mail</mat-icon> Lorem Ipsum</a></li>
+          <li class="menu-item"><a routerLink="/"><mat-icon>assignment</mat-icon> Lorem Ipsum</a></li>
+          <li class="menu-item"><a routerLink="/"><mat-icon>exit_to_app</mat-icon> Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </app-user-button-dropdown>
+</div>
