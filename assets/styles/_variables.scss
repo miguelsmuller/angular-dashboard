@@ -1,0 +1,27 @@
+$colors: (
+  "blue": #1e3c6b,
+  "gray-dark": #333333,
+  "gray": #a19f9d,
+  "gray-light": #edebe9,
+  "white-dark": #f3f2f1,
+  "white": #faf9f8,
+  "white-light": #ffffff,
+  "red": #e63757,
+  "green": #137752,
+  "yellow": #ffad46
+);
+
+$text-size: 14px;
+$text-size-small: 12px;
+$border-radius: 4px;
+
+$breakpoints: (
+  "phone": 400px,
+  "phone-wide": 480px,
+  "phablet": 560px,
+  "tablet-small": 640px,
+  "tablet": 768px,
+  "tablet-wide": 1024px,
+  "desktop": 1248px,
+  "desktop-wide": 1440px
+);

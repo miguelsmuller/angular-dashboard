@@ -1,0 +1,304 @@
+/* # HTML AND BODY
+================================================== */
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+div {
+  display: block;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+
+  overflow: hidden;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: $text-size;
+  line-height: $text-size + 5;
+  color: map-get($colors, "gray-dark");
+}
+
+/* # COMPONENTS DEFAULT
+================================================== */
+a {
+  color: map-get($colors, "gray-dark");
+  text-decoration: none;
+  outline: none;
+
+  &:hover,
+  &:focus,
+  &:focus-within,
+  &:active,
+  &.active {
+    text-decoration: underline;
+  }
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* # TEXT HELPERS
+================================================== */
+.text-small {
+  @include text-small();
+}
+
+.text-normal {
+  @include text-weight("normal");
+}
+.text-semibold {
+  @include text-weight("semibold");
+}
+.text-bold {
+  @include text-weight("bold");
+}
+
+@each $color in $colors {
+  .text-color-#{nth($color,1)} {
+    color: nth($color, 2);
+  }
+}
+
+/* # TEXT HEADINGS
+================================================== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: map-get($colors, "gray-dark");
+  margin: 0px;
+  padding: 0px;
+  @include text-weight("normal");
+}
+
+h1 {
+  font-size: 28px;
+  line-height: 38px;
+}
+h2 {
+  font-size: 18px;
+  line-height: 24px;
+}
+h3 {
+  font-size: 16px;
+  line-height: 22px;
+}
+h4 {
+  font-size: 14px;
+  line-height: 19px;
+}
+h5 {
+  font-size: 12px;
+  line-height: 17px;
+}
+h6 {
+  font-size: 11px;
+  line-height: 15px;
+}
+
+/* # PAGE - AUTH
+================================================== */
+#page-auth {
+  @include flex-row();
+
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  & > :nth-child(1) {
+    flex-shrink: 0; // LESS THAN BROTHER - CAN'T SHRINK
+    flex-grow: 0; // LESS THAN BROTHER - CAN'T GROW
+
+    @include flex-center();
+
+    background-color: map-get($colors, "blue");
+    width: 30%;
+    padding: 110px 140px;
+
+    img {
+      padding: 20px 0px;
+    }
+    h1 {
+      margin: 25px 0px 0px;
+      font-size: 36px;
+      line-height: 42px;
+
+      color: map-get($colors, "white-light");
+      font-weight: 900;
+      text-align: center;
+    }
+    small {
+      color: map-get($colors, "white");
+      opacity: 0.5;
+    }
+  }
+
+  & > :nth-child(2) {
+    flex-shrink: 1; // MORE THAN BROTHER - CAN SHRINK
+    flex-grow: 1; // MORE THAN BROTHER - CAN GROW
+
+    @include flex-center();
+
+    padding: 80px 50px 80px;
+    background: map-get($colors, "white-dark");
+    overflow-y: scroll;
+  }
+
+  .panel-auth {
+    min-width: 100px;
+    max-width: 500px;
+
+    .panel-auth-actions {
+      display: flex;
+      flex-flow: row nowrap;
+
+      justify-content: space-between;
+      align-items: center;
+      align-content: center;
+    }
+  }
+}
+
+/* # PAGE - ADMIN
+================================================== */
+#page-admin {
+  @include flex-column();
+
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  #page-header {
+    @include flex-row();
+    flex-shrink: 0; // LESS THAN BROTHER - CAN'T SHRINK
+    flex-grow: 0; // LESS THAN BROTHER - CAN'T GROW
+
+    background-color: map-get($colors, "blue");
+    color: map-get($colors, "white-light");
+    overflow: hidden;
+    width: 100%;
+    height: 48px;
+
+    #header-title,
+    #header-buttons {
+      display: flex;
+      flex-flow: row nowrap;
+
+      justify-content: flex-start;
+      align-items: center;
+      align-content: center;
+    }
+
+    #header-title {
+      span {
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        word-spacing: 0.1em;
+        margin: 0px 8px;
+      }
+    }
+  }
+
+  #page-wrapper {
+    @include flex-row();
+    flex-shrink: 1; // MORE THAN BROTHER - CAN SHRINK
+    flex-grow: 1; // MORE THAN BROTHER - CAN GROW
+
+    width: 100%;
+    overflow: hidden;
+  }
+
+  #navigation {
+    flex-shrink: 0; // LESS THAN BROTHER - CAN'T SHRINK
+    flex-grow: 0; // LESS THAN BROTHER - CAN'T GROW
+
+    background-color: map-get($colors, "white-dark");
+    overflow: hidden;
+    width: 214px;
+
+    & > :nth-child(1) {
+      flex-shrink: 0; // LESS THAN BROTHER - CAN'T SHRINK
+      flex-grow: 0; // LESS THAN BROTHER - CAN'T GROW
+
+      @include flex-row();
+
+      height: 44px;
+
+      & > :nth-child(n + 2) {
+        flex-grow: 1;
+      }
+    }
+
+    & > :nth-child(2) {
+      flex-shrink: 1; // MORE THAN BROTHER - CAN SHRINK
+      flex-grow: 1; // MORE THAN BROTHER - CAN GROW
+    }
+  }
+
+  #container {
+    flex-shrink: 1; // MORE THAN BROTHER - CAN SHRINK
+    flex-grow: 1; // MORE THAN BROTHER - CAN GROW
+
+    @include flex-column();
+
+    background-color: map-get($colors, "white-light");
+    overflow: auto;
+  }
+
+  #content-header {
+    flex-shrink: 0; // LESS THAN BROTHER - CAN'T SHRINK
+    flex-grow: 0; // LESS THAN BROTHER - CAN'T GROW
+
+    border: 1px solid map-get($colors, "gray-light");
+    border-right: none;
+    background-color: map-get($colors, "white-light");
+
+    padding: 16px 0px 16px 34px;
+    display: block;
+    height: 57px;
+
+    h2 {
+      margin: 0px;
+      font-weight: 600;
+    }
+  }
+
+  #content {
+    flex-shrink: 1; // MORE THAN BROTHER - CAN SHRINK
+    flex-grow: 1; // MORE THAN BROTHER - CAN GROW
+
+    width: 100%;
+    overflow: auto;
+    border-left: 1px solid map-get($colors, 'gray-light' );
+
+    padding: 20px 40px 40px;
+  }
+}
+
+/* # OVERLAY
+================================================== */
+.cdk-overlay-container {
+  .cdk-overlay-pane {
+    background-color: transparent;
+  }
+  .app-overlay-backdrop-transparent {
+    background-color: transparent;
+  }
+}

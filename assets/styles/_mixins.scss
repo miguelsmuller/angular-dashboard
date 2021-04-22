@@ -1,0 +1,79 @@
+@mixin with-prefix($prop, $value) {
+  -webkit-#{$prop}: #{$value};
+  -moz-#{$prop}: #{$value};
+  -ms-#{$prop}: #{$value};
+  -o-#{$prop}: #{$value};
+  #{$prop}: #{$value};
+}
+
+@mixin border-radius() {
+  @include with-prefix("border-radius", $border-radius);
+}
+
+@mixin text-small() {
+  font-size: $text-size-small;
+  line-height: $text-size-small + 5;
+}
+
+@mixin text-weight($weight: "normal") {
+  @if $weight != "normal" and $weight != "semibold" and $weight != "bold" {
+    @error '{#{$weight}} is not a valid argument';
+  }
+
+  @if $weight == "normal" {
+    font-weight: 400;
+  } @else if $weight == "semibold" {
+    font-weight: 600;
+  } @else if $weight == "bold" {
+    font-weight: 700;
+  }
+}
+
+@mixin flex-column() {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+}
+
+@mixin flex-row() {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+  align-content: center;
+}
+
+@mixin flex-center() {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+}
+
+@mixin breakpoint($type: "max", $size: "") {
+  @if $size == "" {
+    @warn 'Warning: Necessario informar um breakpoint valido.';
+  }
+
+  @media (#{$type}-width: $size) {
+    @content;
+  }
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
